@@ -38,69 +38,37 @@ public class TaskJPA implements Task {
 		inverseJoinColumns = { @JoinColumn(name = "task_id") })
 	private Set<TaskJPA> subTasks = new HashSet<TaskJPA>(0);
 	
-	/* (non-Javadoc)
-	 * @see com.dehrg.todos.model.jpa.Task#getTaskId()
-	 */
-	
 	public long getTaskId() {
 		return taskId;
 	}
-	/* (non-Javadoc)
-	 * @see com.dehrg.todos.model.jpa.Task#setTaskId(long)
-	 */
 	public void setTaskId(long taskId) {
 		this.taskId = taskId;
 	}
 	
-	/* (non-Javadoc)
-	 * @see com.dehrg.todos.model.jpa.Task#getName()
-	 */
-	
 	public String getName() {
 		return name;
 	}
-	/* (non-Javadoc)
-	 * @see com.dehrg.todos.model.jpa.Task#setName(java.lang.String)
-	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 	
-	/* (non-Javadoc)
-	 * @see com.dehrg.todos.model.jpa.Task#getWeight()
-	 */
 	public int getWeight() {
 		return weight;
 	}
-	/* (non-Javadoc)
-	 * @see com.dehrg.todos.model.jpa.Task#setWeight(int)
-	 */
 	public void setWeight(int weight) {
 		this.weight = weight;
 	}
 	
-	/* (non-Javadoc)
-	 * @see com.dehrg.todos.model.jpa.Task#isComplete()
-	 */
 	public boolean isComplete() {
 		return complete;
 	}
-	/* (non-Javadoc)
-	 * @see com.dehrg.todos.model.jpa.Task#setComplete(boolean)
-	 */
 	public void setComplete(boolean complete) {
 		this.complete = complete;
 	}
 	
-	/* (non-Javadoc)
-	 * @see com.dehrg.todos.model.jpa.Task#getSubTasks()
-	 */
 	public Set<TaskJPA> getSubTasks() {
 		return subTasks;
 	}
-	/* (non-Javadoc)
-	 * @see com.dehrg.todos.model.jpa.Task#setSubTasks(java.util.Set)
-	 */
 	public void setSubTasks(Set<TaskJPA> subTasks) {
 		this.subTasks = subTasks;
 	}
