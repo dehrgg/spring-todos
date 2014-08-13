@@ -26,6 +26,6 @@ public interface GenericDao <T, K extends Serializable> {
 	
 	public JPQLQuery newQuery();
 	
-	public EntityPathBase<? extends T> getDefinition();
+	public EntityPathBase<T> getDefinition();
 	
 }
