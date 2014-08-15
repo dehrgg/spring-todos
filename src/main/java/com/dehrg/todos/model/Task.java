@@ -13,6 +13,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 @Entity
 @Table(name = "task")
 public class Task {
@@ -64,6 +66,7 @@ public class Task {
 		this.complete = complete;
 	}
 	
+	@JsonIgnore
 	public Set<Task> getSubTasks() {
 		return subTasks;
 	}
