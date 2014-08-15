@@ -18,6 +18,10 @@ public abstract class GenericJPADao<T, K extends Serializable> implements Generi
 	private EntityManager entityManager;
 	private Class<T> type;
 	
+	public GenericJPADao(Class<T> type) {
+		setType(type);
+	}
+	
 	@Override
 	@Transactional
 	public T create(T newObject) {

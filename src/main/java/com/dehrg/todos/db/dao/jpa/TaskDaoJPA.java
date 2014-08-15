@@ -11,6 +11,10 @@ import com.mysema.query.types.path.EntityPathBase;
 public class TaskDaoJPA extends GenericJPADao<Task, Long> implements TaskDao {
 	private QTask task = QTask.task;
 
+	public TaskDaoJPA() {
+		super(Task.class);
+	}
+	
 	@Override
 	public EntityPathBase<Task> getDefinition() {
 		return task;
