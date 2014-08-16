@@ -23,9 +23,9 @@ public class TaskAPIController {
 	@Resource private TaskDao dao;
 	
 	@RequestMapping(method = RequestMethod.GET)
-	public ResponseEntity<List<? extends Task>> index() {
-		List<? extends Task> tasks = dao.readAll();
-		return new ResponseEntity<List<? extends Task>>(tasks, HttpStatus.OK);
+	public ResponseEntity<List<Task>> index() {
+		List<Task> tasks = dao.readAll();
+		return new ResponseEntity<List<Task>>(tasks, HttpStatus.OK);
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, value = "/{id}")

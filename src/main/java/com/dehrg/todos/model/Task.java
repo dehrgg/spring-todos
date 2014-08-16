@@ -3,7 +3,6 @@ package com.dehrg.todos.model;
 import java.util.Set;
 
 import com.dehrg.todos.Actionable;
-import com.dehrg.todos.model.jpa.TaskJPA;
 
 public interface Task extends Actionable {
 
@@ -23,8 +22,8 @@ public interface Task extends Actionable {
 
 	public void setComplete(boolean complete);
 
-	public Set<TaskJPA> getSubTasks();
+	public Set<Task> getSubTasks();
 
-	public void setSubTasks(Set<TaskJPA> subTasks);
+	public void setSubTasks(Set<Task> subTasks);
 
 }

@@ -1,6 +1,7 @@
 package com.dehrg.todos.db.dao.jpa;
 
 import java.io.Serializable;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -16,7 +17,11 @@ public abstract class GenericJPADao<T, K extends Serializable> implements Generi
 
 	@PersistenceContext
 	private EntityManager entityManager;
-	private Class<T> type;
+	private Class<? extends T> type;
+	
+	public GenericJPADao(Class<? extends T> type) {
+		setType(type);
+	}
 	
 	@Override
 	@Transactional
@@ -31,18 +36,18 @@ public abstract class GenericJPADao<T, K extends Serializable> implements Generi
 	}
 	
 	@Override
-	public List<? extends T> readAll() {
+	public List<T> readAll() {
 		EntityPathBase<? extends T> tableDef = getDefinition();
-		return newQuery().from(tableDef).list(tableDef);
+		return unboundedList(newQuery().from(tableDef).list(tableDef));
 	}
 	
 	@Override
-	public List<? extends T> readAll(long limit) {
+	public List<T> readAll(long limit) {
 		if (limit <= 0) {
 			return readAll();
 		}
 		EntityPathBase<? extends T> tableDef = getDefinition();
-		return newQuery().from(tableDef).limit(limit).list(tableDef);
+		return unboundedList(newQuery().from(tableDef).limit(limit).list(tableDef));
 	}
 	
 	@Override
@@ -67,11 +72,11 @@ public abstract class GenericJPADao<T, K extends Serializable> implements Generi
 		return false;
 	}
 	
-	public Class<T> getType() {
+	public Class<? extends T> getType() {
 		return type;
 	}
 
-	public void setType(Class<T> type) {
+	public void setType(Class<? extends T> type) {
 		this.type = type;
 	}
 	
@@ -83,5 +88,9 @@ public abstract class GenericJPADao<T, K extends Serializable> implements Generi
 	@Override
 	public JPQLQuery newQuery() {
 		return new JPAQuery(entityManager);
+	}
+	
+	protected List<T> unboundedList(List<? extends T> toConvert) {
+		return new LinkedList<T>(toConvert);
 	}
 }

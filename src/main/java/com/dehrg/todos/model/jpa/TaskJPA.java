@@ -13,6 +13,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 import com.dehrg.todos.model.Task;
 
 @Entity
@@ -33,10 +35,10 @@ public class TaskJPA implements Task {
 	@Column(name ="complete")
 	private boolean complete;
 	
-	@OneToMany( cascade = CascadeType.ALL )
+	@OneToMany( cascade = CascadeType.ALL, targetEntity=TaskJPA.class )
 	@JoinTable( name = "task_parent", joinColumns = { @JoinColumn(name = "parent")}, 
 		inverseJoinColumns = { @JoinColumn(name = "task_id") })
-	private Set<TaskJPA> subTasks = new HashSet<TaskJPA>(0);
+	private Set<Task> subTasks = new HashSet<Task>(0);
 	
 	public long getTaskId() {
 		return taskId;
@@ -66,10 +68,11 @@ public class TaskJPA implements Task {
 		this.complete = complete;
 	}
 	
-	public Set<TaskJPA> getSubTasks() {
+	@JsonIgnore
+	public Set<Task> getSubTasks() {
 		return subTasks;
 	}
-	public void setSubTasks(Set<TaskJPA> subTasks) {
+	public void setSubTasks(Set<Task> subTasks) {
 		this.subTasks = subTasks;
 	}
 	

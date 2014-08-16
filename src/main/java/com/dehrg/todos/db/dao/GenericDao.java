@@ -12,9 +12,9 @@ public interface GenericDao <T, K extends Serializable> {
 	
 	public T read(K key);
 	
-	public List<? extends T> readAll();
+	public List<T> readAll();
 	
-	public List<? extends T> readAll(long limit);
+	public List<T> readAll(long limit);
 	
 	public T update(T object);	
 	
