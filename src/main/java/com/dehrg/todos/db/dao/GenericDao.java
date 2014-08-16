@@ -3,9 +3,6 @@ package com.dehrg.todos.db.dao;
 import java.io.Serializable;
 import java.util.List;
 
-import com.mysema.query.jpa.JPQLQuery;
-import com.mysema.query.types.path.EntityPathBase;
-
 public interface GenericDao <T, K extends Serializable> {
 	
 	public T create(T newObject);
@@ -23,9 +20,5 @@ public interface GenericDao <T, K extends Serializable> {
 	public boolean delete(K key);
 	
 	public void reset(T object);
-	
-	public JPQLQuery newQuery();
-	
-	public EntityPathBase<? extends T> getDefinition();
 	
 }

@@ -85,12 +85,13 @@ public abstract class GenericJPADao<T, K extends Serializable> implements Generi
 		entityManager.refresh(object);
 	}
 	
-	@Override
-	public JPQLQuery newQuery() {
+	protected JPQLQuery newQuery() {
 		return new JPAQuery(entityManager);
 	}
 	
 	protected List<T> unboundedList(List<? extends T> toConvert) {
 		return new LinkedList<T>(toConvert);
 	}
+	
+	protected abstract EntityPathBase<? extends T> getDefinition();
 }
