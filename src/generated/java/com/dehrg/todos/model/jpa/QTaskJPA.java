@@ -22,11 +22,11 @@ public class QTaskJPA extends EntityPathBase<TaskJPA> {
 
     public final BooleanPath complete = createBoolean("complete");
 
+    public final NumberPath<Long> id = createNumber("id", Long.class);
+
     public final StringPath name = createString("name");
 
     public final SetPath<TaskJPA, QTaskJPA> subTasks = this.<TaskJPA, QTaskJPA>createSet("subTasks", TaskJPA.class, QTaskJPA.class, PathInits.DIRECT2);
-
-    public final NumberPath<Long> taskId = createNumber("taskId", Long.class);
 
     public final NumberPath<Integer> weight = createNumber("weight", Integer.class);
 

@@ -9,11 +9,12 @@ import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
 import com.dehrg.todos.db.dao.GenericDao;
+import com.dehrg.todos.model.PersistentEntity;
 import com.mysema.query.jpa.JPQLQuery;
 import com.mysema.query.jpa.impl.JPAQuery;
 import com.mysema.query.types.path.EntityPathBase;
 
-public abstract class GenericJPADao<T, K extends Serializable> implements GenericDao<T, K> {
+public abstract class GenericJPADao<T extends PersistentEntity<K>, K extends Serializable> implements GenericDao<T, K> {
 
 	@PersistenceContext
 	private EntityManager entityManager;
@@ -53,7 +54,9 @@ public abstract class GenericJPADao<T, K extends Serializable> implements Generi
 	@Override
 	@Transactional
 	public T update(T object) {
-		return entityManager.merge(object);	
+		if (read(object.getId()) == null)
+				return null;
+		return entityManager.merge(object);
 	}
 	
 	@Override
@@ -72,14 +75,6 @@ public abstract class GenericJPADao<T, K extends Serializable> implements Generi
 		return false;
 	}
 	
-	public Class<? extends T> getType() {
-		return type;
-	}
-
-	public void setType(Class<? extends T> type) {
-		this.type = type;
-	}
-	
 	@Override
 	public void reset(T object) {
 		entityManager.refresh(object);
@@ -94,4 +89,12 @@ public abstract class GenericJPADao<T, K extends Serializable> implements Generi
 	}
 	
 	protected abstract EntityPathBase<? extends T> getDefinition();
+	
+	public Class<? extends T> getType() {
+		return type;
+	}
+
+	public void setType(Class<? extends T> type) {
+		this.type = type;
+	}
 }

@@ -1,9 +1,12 @@
 package com.dehrg.todos.controller.api;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.springframework.beans.BeanWrapper;
+import org.springframework.beans.BeanWrapperImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -48,10 +51,16 @@ public class TaskAPIController {
 	
 	@ResponseBody
 	@RequestMapping(method = RequestMethod.PUT, value = "/{id}")
-	public ResponseEntity<Task> update(@PathVariable long id, @RequestBody Task object) {
-		object.setTaskId(id);
-		Task task = dao.update(object);
+	public ResponseEntity<Task> update(@PathVariable long id, @RequestBody Map<String, Object> updateValues) {
+		Task task = dao.read(id);
+		setProperties(task, updateValues);
+		task = dao.update(task);
 		return new ResponseEntity<Task>(task, HttpStatus.OK);
+	}
+	
+	private <T> void setProperties(T object, Map<String, Object> props) {
+		BeanWrapper wrapper = new BeanWrapperImpl(object);
+		wrapper.setPropertyValues(props);
 	}
 	
 }

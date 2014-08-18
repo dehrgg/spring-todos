@@ -3,7 +3,9 @@ package com.dehrg.todos.db.dao;
 import java.io.Serializable;
 import java.util.List;
 
-public interface GenericDao <T, K extends Serializable> {
+import com.dehrg.todos.model.PersistentEntity;
+
+public interface GenericDao <T extends PersistentEntity<K>, K extends Serializable> {
 	
 	public T create(T newObject);
 	

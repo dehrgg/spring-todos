@@ -24,7 +24,7 @@ public class TaskJPA implements Task {
 	@Id
 	@GeneratedValue
 	@Column(name = "task_id")
-	private long taskId;
+	private Long id;
 	
 	@Column(name = "name", nullable = false, length = 150)
 	private String name;
@@ -40,11 +40,11 @@ public class TaskJPA implements Task {
 		inverseJoinColumns = { @JoinColumn(name = "task_id") })
 	private Set<Task> subTasks = new HashSet<Task>(0);
 	
-	public long getTaskId() {
-		return taskId;
+	public Long getId() {
+		return id;
 	}
-	public void setTaskId(long taskId) {
-		this.taskId = taskId;
+	public void setId(Long taskId) {
+		this.id = taskId;
 	}
 	
 	public String getName() {
