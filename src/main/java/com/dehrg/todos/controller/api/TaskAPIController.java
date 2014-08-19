@@ -44,8 +44,10 @@ public class TaskAPIController {
 	
 	@ResponseBody
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<Task> create(@RequestBody Task object) {
-		Task task = dao.create(object);
+	public ResponseEntity<Task> create(@RequestBody Map<String, Object> updateValues) {
+		Task task = dao.instanceOfPersistentClass();
+		setProperties(task, updateValues);
+		dao.create(task);
 		return new ResponseEntity<Task>(task, HttpStatus.CREATED);
 	}
 	

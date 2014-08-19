@@ -2,12 +2,8 @@ package com.dehrg.todos.model;
 
 import java.util.Set;
 
-import org.codehaus.jackson.map.annotate.JsonDeserialize;
-
 import com.dehrg.todos.Actionable;
-import com.dehrg.todos.model.jpa.TaskJPA;
 
-@JsonDeserialize(as=TaskJPA.class)
 public interface Task extends Actionable, PersistentEntity<Long> {
 
 	public String getName();

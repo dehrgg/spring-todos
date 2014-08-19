@@ -23,4 +23,6 @@ public interface GenericDao <T extends PersistentEntity<K>, K extends Serializab
 	
 	public void reset(T object);
 	
+	public T instanceOfPersistentClass();
+	
 }

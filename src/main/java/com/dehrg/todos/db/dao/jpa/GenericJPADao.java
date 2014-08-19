@@ -80,6 +80,16 @@ public abstract class GenericJPADao<T extends PersistentEntity<K>, K extends Ser
 		entityManager.refresh(object);
 	}
 	
+	@Override
+	public T instanceOfPersistentClass() {
+		try {
+			return type.newInstance();
+		} catch (InstantiationException e) {
+		} catch (IllegalAccessException e) {
+		}
+		return null;
+	}
+	
 	protected JPQLQuery newQuery() {
 		return new JPAQuery(entityManager);
 	}
