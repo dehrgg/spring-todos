@@ -20,11 +20,15 @@ public class QTaskJPA extends EntityPathBase<TaskJPA> {
 
     public static final QTaskJPA taskJPA = new QTaskJPA("taskJPA");
 
+    public final DateTimePath<java.util.Calendar> actualFinishDate = createDateTime("actualFinishDate", java.util.Calendar.class);
+
     public final BooleanPath complete = createBoolean("complete");
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
     public final StringPath name = createString("name");
+
+    public final DateTimePath<java.util.Calendar> plannedFinishDate = createDateTime("plannedFinishDate", java.util.Calendar.class);
 
     public final SetPath<TaskJPA, QTaskJPA> subTasks = this.<TaskJPA, QTaskJPA>createSet("subTasks", TaskJPA.class, QTaskJPA.class, PathInits.DIRECT2);
 

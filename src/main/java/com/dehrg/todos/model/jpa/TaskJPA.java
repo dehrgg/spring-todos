@@ -1,5 +1,6 @@
 package com.dehrg.todos.model.jpa;
 
+import java.util.Calendar;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -12,6 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
 
@@ -39,6 +42,14 @@ public class TaskJPA implements Task {
 	@JoinTable( name = "task_parent", joinColumns = { @JoinColumn(name = "parent")}, 
 		inverseJoinColumns = { @JoinColumn(name = "task_id") })
 	private Set<Task> subTasks = new HashSet<Task>(0);
+	
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "planned_finish_date")
+	Calendar plannedFinishDate;
+	
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "actual_finish_date")
+	Calendar actualFinishDate;
 	
 	public Long getId() {
 		return id;
@@ -74,6 +85,24 @@ public class TaskJPA implements Task {
 	}
 	public void setSubTasks(Set<Task> subTasks) {
 		this.subTasks = subTasks;
+	}
+	
+	@Override
+	public Calendar getPlannedFinishDate() {
+		return plannedFinishDate;
+	}
+	@Override
+	public void setPlannedFinishDate(Calendar date) {
+		this.plannedFinishDate = date;
+	}
+	
+	@Override
+	public Calendar getActualFinishDate() {
+		return actualFinishDate;
+	}
+	@Override
+	public void setActualFinishDate(Calendar date) {
+		this.actualFinishDate = date;
 	}
 	
 }
