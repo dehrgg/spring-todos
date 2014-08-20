@@ -35,10 +35,10 @@ public class TaskJPA implements Task {
 	@Column(name = "weight")
 	private int weight;
 	
-	@Column(name ="complete")
+	@Column(name = "complete")
 	private boolean complete;
 	
-	@OneToMany( cascade = CascadeType.ALL, targetEntity=TaskJPA.class )
+	@OneToMany( cascade = CascadeType.ALL, targetEntity = TaskJPA.class)
 	@JoinTable( name = "task_parent", joinColumns = { @JoinColumn(name = "parent")}, 
 		inverseJoinColumns = { @JoinColumn(name = "task_id") })
 	private Set<Task> subTasks = new HashSet<Task>(0);
@@ -51,38 +51,48 @@ public class TaskJPA implements Task {
 	@Column(name = "actual_finish_date")
 	Calendar actualFinishDate;
 	
+	@Override
 	public Long getId() {
 		return id;
 	}
+	@Override
 	public void setId(Long taskId) {
 		this.id = taskId;
 	}
-	
+
+	@Override
 	public String getName() {
 		return name;
 	}
+	@Override
 	public void setName(String name) {
 		this.name = name;
 	}
 	
+	@Override
 	public int getWeight() {
 		return weight;
 	}
+	@Override
 	public void setWeight(int weight) {
 		this.weight = weight;
 	}
 	
+	@Override
 	public boolean isComplete() {
 		return complete;
 	}
+	@Override
 	public void setComplete(boolean complete) {
 		this.complete = complete;
 	}
 	
 	@JsonIgnore
+	@Override
 	public Set<Task> getSubTasks() {
 		return subTasks;
 	}
+	@Override
 	public void setSubTasks(Set<Task> subTasks) {
 		this.subTasks = subTasks;
 	}

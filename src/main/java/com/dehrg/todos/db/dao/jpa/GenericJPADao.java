@@ -27,7 +27,11 @@ public abstract class GenericJPADao<T extends PersistentEntity<K>, K extends Ser
 	@Override
 	@Transactional
 	public T create(T newObject) {
-		entityManager.persist(newObject);
+		if (newObject.getId() != null)
+			entityManager.persist(newObject);
+		else {
+			//FIXME: DAO exception
+		}
 		return newObject;
 	}
 
@@ -54,8 +58,10 @@ public abstract class GenericJPADao<T extends PersistentEntity<K>, K extends Ser
 	@Override
 	@Transactional
 	public T update(T object) {
-		if (read(object.getId()) == null)
-				return null;
+		if (read(object.getId()) == null) {
+			//FIXME: DAO exception
+			return null;
+		}
 		return entityManager.merge(object);
 	}
 	
@@ -72,6 +78,7 @@ public abstract class GenericJPADao<T extends PersistentEntity<K>, K extends Ser
 			delete(object);
 			return true;
 		}
+		//FIXME DAO exception
 		return false;
 	}
 	
