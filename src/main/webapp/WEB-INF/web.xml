@@ -28,10 +28,12 @@
 		</init-param>
 		<load-on-startup>1</load-on-startup>
     </servlet>
-
-    <servlet-mapping>
+	
+	<servlet-mapping>
+	    <!-- FIXME -->
         <servlet-name>dispatcher</servlet-name>
         <url-pattern>/api/*</url-pattern>
+        <url-pattern>/gui/*</url-pattern>
     </servlet-mapping>
     
 </web-app>
