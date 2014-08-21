@@ -3,12 +3,11 @@ package com.dehrg.todos.model.jpa;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -19,14 +18,26 @@ import com.dehrg.todos.model.TaskList;
 @Table( name = "tasklist" )
 public class TaskListJPA implements TaskList {
 	
+	@Id
+	@GeneratedValue
+	@Column(name = "tasklist_id")
+	private Long id;
+	
 	@Column(name = "name", nullable = false, length = 150)
 	private String name;
 	
-	@OneToMany( cascade = CascadeType.ALL, targetEntity = TaskJPA.class, fetch = FetchType.EAGER  )
-	@JoinTable( name = "task_tasklist", joinColumns = { @JoinColumn(name = "task_id")}, 
-	inverseJoinColumns = { @JoinColumn(name = "task_id") })
+	@OneToMany( targetEntity = TaskJPA.class, fetch = FetchType.EAGER, mappedBy = "taskList"  )
 	private Set<Task> tasks = new HashSet<Task>();
 
+	@Override
+	public Long getId() {
+		return id;
+	}
+	@Override
+	public void setId(Long taskId) {
+		this.id = taskId;
+	}
+	
 	@Override
 	public String getName() {
 		return name;

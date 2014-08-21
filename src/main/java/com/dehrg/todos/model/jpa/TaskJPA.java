@@ -4,13 +4,12 @@ import java.util.Calendar;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -19,6 +18,7 @@ import javax.persistence.TemporalType;
 import org.codehaus.jackson.annotate.JsonIgnore;
 
 import com.dehrg.todos.model.Task;
+import com.dehrg.todos.model.TaskList;
 
 @Entity
 @Table(name = "task")
@@ -38,10 +38,12 @@ public class TaskJPA implements Task {
 	@Column(name = "complete")
 	private boolean complete;
 	
-	@OneToMany( cascade = CascadeType.ALL, targetEntity = TaskJPA.class)
-	@JoinTable( name = "task_parent", joinColumns = { @JoinColumn(name = "parent")}, 
-		inverseJoinColumns = { @JoinColumn(name = "task_id") })
+	@OneToMany(targetEntity = TaskJPA.class, mappedBy="parent")
 	private Set<Task> subTasks = new HashSet<Task>(0);
+	
+	@ManyToOne
+	@JoinColumn(name="parent_id")
+	private Task parent;
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "planned_finish_date")
@@ -50,6 +52,10 @@ public class TaskJPA implements Task {
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "actual_finish_date")
 	Calendar actualFinishDate;
+	
+	@ManyToOne(targetEntity = TaskListJPA.class)
+	@JoinColumn(name = "tasklist_id")
+	TaskList taskList;
 	
 	@Override
 	public Long getId() {
@@ -98,6 +104,15 @@ public class TaskJPA implements Task {
 	}
 	
 	@Override
+	public Task getParent() {
+		return parent;
+	}
+	@Override
+	public void setParent(Task parent) {
+		this.parent = parent;
+	}
+	
+	@Override
 	public Calendar getPlannedFinishDate() {
 		return plannedFinishDate;
 	}
@@ -113,6 +128,15 @@ public class TaskJPA implements Task {
 	@Override
 	public void setActualFinishDate(Calendar date) {
 		this.actualFinishDate = date;
+	}
+	
+	@Override
+	public TaskList getTaskList() {
+		return taskList;
+	}
+	@Override
+	public void setTaskList(TaskList taskList) {
+		this.taskList = taskList;
 	}
 	
 }

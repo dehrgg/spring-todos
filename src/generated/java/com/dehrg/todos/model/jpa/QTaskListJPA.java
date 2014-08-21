@@ -20,6 +20,8 @@ public class QTaskListJPA extends EntityPathBase<TaskListJPA> {
 
     public static final QTaskListJPA taskListJPA = new QTaskListJPA("taskListJPA");
 
+    public final NumberPath<Long> id = createNumber("id", Long.class);
+
     public final StringPath name = createString("name");
 
     public final SetPath<TaskJPA, QTaskJPA> tasks = this.<TaskJPA, QTaskJPA>createSet("tasks", TaskJPA.class, QTaskJPA.class, PathInits.DIRECT2);

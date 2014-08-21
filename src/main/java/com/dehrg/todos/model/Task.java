@@ -24,5 +24,11 @@ public interface Task extends Actionable, PersistentEntity<Long> {
 	
 	public Calendar getActualFinishDate();
 	public void setActualFinishDate(Calendar date);
+	
+	public Task getParent();
+	public void setParent(Task parent);
+	
+	public TaskList getTaskList();
+	public void setTaskList(TaskList taskList);
 
 }

@@ -2,7 +2,7 @@ package com.dehrg.todos.model;
 
 import java.util.Set;
 
-public interface TaskList {
+public interface TaskList extends PersistentEntity<Long> {
 	public String getName();
 	public void setName(String name);
 	
