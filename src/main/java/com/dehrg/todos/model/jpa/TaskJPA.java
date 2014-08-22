@@ -41,7 +41,7 @@ public class TaskJPA implements Task {
 	@OneToMany(targetEntity = TaskJPA.class, mappedBy="parent")
 	private Set<Task> subTasks = new HashSet<Task>(0);
 	
-	@ManyToOne
+	@ManyToOne(targetEntity = TaskJPA.class)
 	@JoinColumn(name="parent_id")
 	private Task parent;
 	

@@ -30,7 +30,7 @@ public class QTaskJPA extends EntityPathBase<TaskJPA> {
 
     public final StringPath name = createString("name");
 
-    public final SimplePath<com.dehrg.todos.model.Task> parent = createSimple("parent", com.dehrg.todos.model.Task.class);
+    public final QTaskJPA parent;
 
     public final DateTimePath<java.util.Calendar> plannedFinishDate = createDateTime("plannedFinishDate", java.util.Calendar.class);
 
@@ -58,6 +58,7 @@ public class QTaskJPA extends EntityPathBase<TaskJPA> {
 
     public QTaskJPA(Class<? extends TaskJPA> type, PathMetadata<?> metadata, PathInits inits) {
         super(type, metadata, inits);
+        this.parent = inits.isInitialized("parent") ? new QTaskJPA(forProperty("parent"), inits.get("parent")) : null;
         this.taskList = inits.isInitialized("taskList") ? new QTaskListJPA(forProperty("taskList")) : null;
     }
 
