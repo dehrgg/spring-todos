@@ -21,7 +21,7 @@
 		<maven-compiler.version>2.1</maven-compiler.version>
 		<maven-build-helper.version>1.7</maven-build-helper.version>
 		<dbcp.version>1.4</dbcp.version>
-		<jackson.version>1.9.13</jackson.version>
+		<jackson.version>2.0.0</jackson.version>
 	</properties>
 
 	<dependencies>
@@ -182,13 +182,18 @@
 	    
 	    <!-- Jackson -->
 	    <dependency>
-	    	<groupId>org.codehaus.jackson</groupId>
-	    	<artifactId>jackson-mapper-asl</artifactId>
+	    	<groupId>com.fasterxml.jackson.core</groupId>
+	    	<artifactId>jackson-core</artifactId>
 	    	<version>${jackson.version}</version>
 	    </dependency>
    	    <dependency>
-	    	<groupId>org.codehaus.jackson</groupId>
-	    	<artifactId>jackson-core-asl</artifactId>
+	    	<groupId>com.fasterxml.jackson.core</groupId>
+	    	<artifactId>jackson-annotations</artifactId>
+	    	<version>${jackson.version}</version>
+	    </dependency>
+	    <dependency>
+	    	<groupId>com.fasterxml.jackson.core</groupId>
+	    	<artifactId>jackson-databind</artifactId>
 	    	<version>${jackson.version}</version>
 	    </dependency>
 	</dependencies>
