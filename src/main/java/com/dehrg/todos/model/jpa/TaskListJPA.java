@@ -13,12 +13,9 @@ import javax.persistence.Table;
 
 import com.dehrg.todos.model.Task;
 import com.dehrg.todos.model.TaskList;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table( name = "tasklist" )
-@JsonIdentityInfo(property="id", generator=ObjectIdGenerators.IntSequenceGenerator.class)
 public class TaskListJPA implements TaskList {
 	
 	@Id

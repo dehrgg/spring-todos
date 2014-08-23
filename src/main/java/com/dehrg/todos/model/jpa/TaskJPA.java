@@ -17,9 +17,9 @@ import javax.persistence.TemporalType;
 
 import com.dehrg.todos.model.Task;
 import com.dehrg.todos.model.TaskList;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.dehrg.todos.serialization.EntityIdReferenceSerializer;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 @Entity
 @Table(name = "task")
@@ -105,6 +105,7 @@ public class TaskJPA implements Task {
 	}
 	
 	@Override
+	@JsonSerialize(using=EntityIdReferenceSerializer.class)
 	public Task getParent() {
 		return parent;
 	}
@@ -132,6 +133,7 @@ public class TaskJPA implements Task {
 	}
 	
 	@Override
+	@JsonSerialize(using=EntityIdReferenceSerializer.class)
 	public TaskList getTaskList() {
 		return taskList;
 	}
